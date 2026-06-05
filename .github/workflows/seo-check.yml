@@ -1,0 +1,67 @@
+name: 📊 SEO 自动检查
+
+on:
+  # 每天自动运行一次（北京时间早上8点 = UTC 0点）
+  schedule:
+    - cron: '0 0 * * *'
+  
+  # 也可以手动触发
+  workflow_dispatch:
+
+  # 每次推送到main时也运行
+  push:
+    branches: [main]
+
+jobs:
+  seo-check:
+    name: SEO 状态检查
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 需要完整git历史来检查更新时间
+
+      - name: 🐍 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🚀 运行 SEO 检查脚本
+        id: seo-check
+        run: |
+          python seo_checker.py 2>&1 | tee seo_output.txt
+        continue-on-error: true
+
+      - name: 📄 读取检查结果
+        id: read-result
+        run: |
+          echo "### 📊 SEO 检查结果" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f "SEO_REPORT.md" ]; then
+            cat SEO_REPORT.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "检查未生成报告" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: 💾 保存检查结果到仓库
+        run: |
+          # 只在有变化时才保存
+          if [ -f "seo_status.json" ]; then
+            git config user.name "SEO Bot"
+            git config user.email "seo-bot@example.com"
+            git add seo_status.json SEO_REPORT.md seo_output.txt 2>/dev/null || true
+            git diff --cached --quiet || git commit -m "📊 SEO 自动检查报告 $(date +'%Y-%m-%d')"
+            git push
+          fi
+
+      - name: 📋 输出检查摘要
+        run: |
+          echo ""
+          echo "========================================="
+          echo "  ✅ SEO 检查完成！"
+          echo "========================================="
+          echo "查看完整报告: SEO_REPORT.md"
+          echo "历史数据: seo_status.json"
+          echo "========================================="
