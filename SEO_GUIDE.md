@@ -34,6 +34,14 @@
 - **移动端优化**：确保在各种设备上都有良好体验
 - **HTTPS**：GitHub Pages 默认支持 HTTPS
 
+### ✅ 百度自动推送（已添加）
+所有页面已添加百度自动推送代码，当用户访问页面时会自动向百度提交URL，加速收录。
+
+### ✅ Google 收录（已添加）
+- 首页已添加 Google Search Console 验证 meta 标签
+- 首页已添加 Google Analytics 统计代码
+- **需要你自己操作：** 去 Google Search Console 验证并替换验证码
+
 ### 3. 创建 sitemap.xml
 
 创建 `sitemap.xml` 文件，帮助搜索引擎更好地索引网站：
@@ -155,5 +163,49 @@ Sitemap: https://yourusername.github.io/OPN/sitemap.xml
 - 使用百度统计或 Google Analytics 跟踪网站流量
 - 分析流量来源，优化推广策略
 - 关注转化率，不断优化落地页
+
+## Google 排名怎么做
+
+### 1. Google Search Console 操作步骤
+1. 访问 https://search.google.com/search-console
+2. 用 Google 账号登录
+3. 添加网站：输入 `https://magua2134.github.io/opn/`
+4. 选择"HTML 标签"验证方式
+5. 把验证码复制到首页的 `google-site-verification` meta 标签中
+6. 验证完成后提交 sitemap：`https://magua2134.github.io/opn/sitemap.xml`
+
+### 2. Google 排名因素
+- **移动端友好**：你的网站已经是响应式 ✅
+- **页面速度**：GitHub Pages 加载速度快 ✅
+- **内容质量**：需要持续增加原创内容
+- **外链**：其他网站链接到你的网站
+- **用户体验**：页面布局清晰 ✅
+
+### 3. Google 和百度区别
+| 项目 | 百度 | Google |
+|------|------|--------|
+| 收录难度 | 较难（需主动提交） | 较容易（自动抓取） |
+| 排名因素 | 内容+外链 | 内容+外链+用户体验 |
+| 见效时间 | 1-4周 | 1-2周 |
+| 移动端权重 | 很高 | 很高 |
+
+## 常见问题排查
+
+### Q: 百度不收录怎么办？
+- 检查 robots.txt 是否允许爬取
+- 确认 sitemap.xml 格式正确
+- 多去百度搜索资源平台手动提交
+- 在首页、贴吧等地方发帖带链接，引导百度爬虫
+
+### Q: Google 不收录怎么办？
+- 在 Search Console 手动请求索引
+- 确保页面有足够内容（1000字以上）
+- 检查有无 noindex 标签
+
+### Q: 排名上不去怎么办？
+- 优化长尾关键词（竞争小）
+- 增加更多原创内容
+- 在其他网站发布内容带链接回你的站
+- 耐心等待，SEO 是长期过程
 
 持续优化和坚持是引流成功的关键！
